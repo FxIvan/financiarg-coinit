@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const navigation = [
   { name: "Inicio", href: "/" },
@@ -50,9 +51,12 @@ export default function NoAuth() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link
+            href={"/auth/login"}
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Log in
-          </a>
+          </Link>
         </div>
       </nav>
       <Dialog

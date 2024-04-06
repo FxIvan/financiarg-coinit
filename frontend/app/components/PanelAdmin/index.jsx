@@ -24,7 +24,7 @@ export default function PanelAdmin({}) {
     e.preventDefault();
     console.log(form);
     const res = await fetch(
-      "http://localhost:8080/api/company/createPromotion",
+      "https://financiarg.tech/api/company/createPromotion",
       {
         method: "POST",
         headers: {

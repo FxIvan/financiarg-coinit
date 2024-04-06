@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "deploy": "scp -r config controllers middleware models resources routes utils package.json index.js root@147.182.250.13:/var/www/backend"
+    "deploy": "scp -r config controllers middlewares models resources routes utils package.json index.js root@147.182.250.13:/var/www/backend"
   },
   "author": "",
   "license": "ISC",

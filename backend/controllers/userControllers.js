@@ -1,5 +1,7 @@
 const generateToken = require("../utils/generateToken");
 const asyncHandler = require("express-async-handler");
+const userModel = require("../models/userModel");
+const Boom = require("@hapi/boom");
 
 const authUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
@@ -7,22 +9,11 @@ const authUser = asyncHandler(async (req, res, next) => {
     if (!email || !password)
       throw Boom.badRequest(t("error:sharedErrors.allFieldsRequired"));
 
-    const emailSplit = email.split("@");
+    const emailSplit = email.toLowerCase();
 
-    const filterUser =
-      emailSplit.length == 1
-        ? { username: emailSplit[0] }
-        : { email: email.toLowerCase() };
-
-    const userDoc = await User.findOne(filterUser);
+    const userDoc = await userModel.findOne({ email: emailSplit });
     if (!userDoc) throw Boom.badRequest(t("error:sharedErrors.userNotFound"));
-    if (!userDoc.isActive)
-      throw Boom.badRequest(t("error:sharedErrors.userNotActive"));
-    if (userDoc.blocked)
-      throw Boom.badRequest(t("error:sharedErrors.userBlocked"));
 
-    if (userDoc.google_auth)
-      throw Boom.badRequest(t("error:sharedErrors.yesAccountOAuth"));
     const isValidPassword = (await userDoc.password) === password;
 
     if (!isValidPassword)
@@ -32,7 +23,7 @@ const authUser = asyncHandler(async (req, res, next) => {
     const user = userDoc.toObject();
 
     return res.status(200).json({
-      message: t("succ:user.authenticated"),
+      message: "User authenticated successfully",
       user,
       token: generateToken(user._id),
     });
@@ -42,23 +33,24 @@ const authUser = asyncHandler(async (req, res, next) => {
 });
 
 const registerUser = asyncHandler(async (req, res, next) => {
-  const { email, password, confirmPassword } = req.body;
+  const { email, password, confirmPassword, rol } = req.body;
   try {
     if (!email || !password || !confirmPassword)
-      throw Boom.badRequest(t("error:sharedErrors.allFieldsRequired"));
+      throw Boom.badRequest("Complete all fields");
     if (password !== confirmPassword)
-      throw Boom.badRequest(t("error:sharedErrors.passwordNotMatch"));
+      throw Boom.badRequest("Passwords do not match");
 
-    const userDoc = await User.findOne({ email: email.toLowerCase() });
-    if (userDoc)
-      throw Boom.badRequest(t("error:sharedErrors.userAlreadyExists"));
+    const userDoc = await userModel.findOne({ email: email.toLowerCase() });
+    if (userDoc) throw Boom.badRequest("User with this email already exists");
 
-    const user = await User.create({
+    const user = await userModel.create({
       email: email.toLowerCase(),
       password,
+      rol,
     });
 
     return res.status(201).json({
+      status: true,
       message: "User created successfully",
       user,
     });

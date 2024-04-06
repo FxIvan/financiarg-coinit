@@ -1,18 +1,18 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import myToast from "../../components/custom/MyToast";
-import axios from "axios";
 
 export default function Register() {
   const [form, setForm] = useState({
     email: "",
     password: "",
     confirmPassword: "",
+    rol: "user",
   });
   const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,8 +22,6 @@ export default function Register() {
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,13 +38,14 @@ export default function Register() {
     const info = await res.json();
 
     if (info.success) {
-      myToast({
-        variant: "success",
-        children: info.message,
+      setForm({
+        email: "",
+        password: "",
+        confirmPassword: "",
+        rol: "user",
       });
       router.push("/auth/login");
     } else {
-      console.log("Info", info);
       myToast({
         variant: "danger",
         children: info,
@@ -62,6 +61,15 @@ export default function Register() {
             <div>
               <h2 className="text-2xl font-bold text-black mb-4">Register</h2>
               <form className="mt-6  flex flex-col">
+                <select
+                  className="w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-black"
+                  name="rol"
+                  value={form.rol}
+                  onChange={handleChange}
+                >
+                  <option value="user">Cliente</option>
+                  <option value="admin">Empresa</option>
+                </select>
                 <input
                   className="w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-black"
                   name="email"

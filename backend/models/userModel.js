@@ -6,38 +6,17 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    username: {
-      type: String,
-      required: true,
-    },
-    token_balance: {
-      type: Number,
-      default: 0,
-    },
-    emailToken: {
-      type: String,
-      required: false,
-      unique: true,
-    },
     password: {
       type: String,
       required: true,
-    },
-    resetPasswordToken: {
-      type: String,
-      required: false,
-    },
-    resetPasswordExpires: {
-      type: Date,
-      required: false,
     },
     isActive: {
       type: Boolean,
       default: false,
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
+    rol: {
+      type: String,
+      required: true,
     },
     terms_accepted: {
       type: Boolean,
@@ -60,5 +39,5 @@ const userSchema = mongoose.Schema(
   }
 );
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+const userModel = mongoose.model("User", userSchema);
+module.exports = userModel;

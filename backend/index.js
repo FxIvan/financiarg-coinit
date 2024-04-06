@@ -11,7 +11,7 @@ const corsOptions = {
   credentials: true,
 };
 
-const User = require("./models/userModel");
+const userModel = require("./models/userModel");
 
 const path = require("path");
 
@@ -60,7 +60,7 @@ app.use(function (req, res, next) {
   req.method = req.method;
   switch (req.endpoint) {
     case "users":
-      req.Model = User;
+      req.Model = userModel;
       break;
   }
 

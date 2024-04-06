@@ -25,22 +25,20 @@ export const authOptions = {
         const { loginEmail, loginPassword } = credentials;
         let res;
 
-        res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/users/login`,
-          {
-            method: "POST",
-            body: JSON.stringify({
-              email: loginEmail,
-              password: loginPassword,
-            }),
-            headers: {
-              cache: "no-store",
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        res = await fetch(`http://localhost:8080/api/users/login`, {
+          method: "POST",
+          body: JSON.stringify({
+            email: loginEmail,
+            password: loginPassword,
+          }),
+          headers: {
+            cache: "no-store",
+            "Content-Type": "application/json",
+          },
+        });
 
         const user = await res.json();
+
         if (user.statusCode >= 400 || user.error) {
           throw new Error(btoa(user.message) || "Error");
         }
@@ -49,6 +47,7 @@ export const authOptions = {
           {
             id: user.user._id,
             email: user.user.email,
+            role: user.user.rol,
             token: user.token,
             username: user.user.username,
           },

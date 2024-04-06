@@ -105,7 +105,7 @@ export default function Login() {
         </p>
         <form>
           <input
-            className="w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="text-black w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
             type="text"
             name="email"
             value={email}
@@ -114,7 +114,7 @@ export default function Login() {
             required
           />
           <input
-            className="w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="text-black w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
             type="password"
             name="password"
             value={password}

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import NoAuth from "./components/Header/noAuth.jsx";
 import PlantillaInicio from "./components/PlantillaInicio/index.jsx";
 
 export default function Home() {

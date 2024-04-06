@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: "*",
+  origin: "http://localhost:3000",
   optionsSuccessStatus: 204,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
@@ -17,6 +17,12 @@ const path = require("path");
 
 const app = express();
 const server = require("http").Server(app);
+
+//ver de donde viene la request
+app.use((req, res, next) => {
+  console.log(req.method, req.url);
+  next();
+});
 
 //Inhabilite la cabecera X-Powered-By. Los atacantes pueden utilizar esta cabecera (que está habilitada de forma predeterminada) para detectar las aplicaciones que ejecutan Express e iniciar ataques con destinos específicos
 app.disable("x-powered-by");

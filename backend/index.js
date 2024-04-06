@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: "*",
   optionsSuccessStatus: 204,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
@@ -62,6 +62,6 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-//app.use("/api/users", userRoutes);
+app.use("/api/users", require("./routes/userRoutes"));
 
 server.listen(PORT, () => console.log("Server started on port " + PORT));

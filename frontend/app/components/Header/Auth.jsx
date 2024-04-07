@@ -6,9 +6,9 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Inicio", href: "/" },
-  { name: "Subastas", href: "#" },
-  { name: "Ventas anticipadas", href: "#" },
+  { name: "Menu", href: "/" },
+  { name: "Categorias", href: "#" },
+  { name: "Cotizaciones", href: "#" },
 ];
 
 export default function Auth() {
@@ -31,7 +31,7 @@ export default function Auth() {
             <span className="sr-only">Your Company</span>
             <img
               className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+              src="../../public/financiar.png"
               alt=""
             />
           </a>

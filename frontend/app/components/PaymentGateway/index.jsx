@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation";
 const PaymentGateway = ({ promotion }) => {
   const dataPromotions = promotion.promotion;
   //sacar el query params de idProduct la variable pack
-  console.log("promotion", dataPromotions);
   const searchParams = useSearchParams();
   const idProduct = searchParams.get("pack");
 

@@ -11,7 +11,6 @@ const getProductID = async (id) => {
 export default async function ProductID({ params }) {
   const idProduct = params.id;
   const { promotion } = await getProductID(idProduct);
-  console.log(promotion);
 
   return (
     <div className="">

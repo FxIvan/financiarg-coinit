@@ -59,4 +59,22 @@ const registerUser = asyncHandler(async (req, res, next) => {
   }
 });
 
-module.exports = { authUser, registerUser };
+const getInfoUserID = asyncHandler(async (req, res, next) => {
+  const { _id } = req.user;
+
+  try {
+    const userDoc = await userModel.findById(_id);
+    if (!userDoc) throw Boom.badRequest("User not found");
+
+    const user = userDoc.toObject();
+
+    return res.status(200).json({
+      status: true,
+      message: "User information",
+      user,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+module.exports = { authUser, registerUser, getInfoUserID };

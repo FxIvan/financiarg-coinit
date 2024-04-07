@@ -46,3 +46,10 @@ Contraseña: 4272
 Individuo:
 Email: empresa@itba.com
 Contraseña: 4272
+
+
+## Datos de Tarjeta
+- 42425656
+- Juan Perez
+- 12/25
+- 123

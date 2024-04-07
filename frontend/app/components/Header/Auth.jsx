@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
 
 const navigation = [
   { name: "Inicio", href: "/" },
@@ -30,7 +29,7 @@ export default function Auth() {
             <span className="sr-only">Your Company</span>
             <img
               className="h-8 w-auto"
-              src="../../public/financiar.png"
+              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt=""
             />
           </a>
@@ -75,7 +74,7 @@ export default function Auth() {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Financiarg</span>
               <img
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"

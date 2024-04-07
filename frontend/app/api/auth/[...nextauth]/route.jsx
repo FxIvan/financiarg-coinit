@@ -60,10 +60,13 @@ export const authOptions = {
   ],
   callbacks: {
     async jwt({ token, account, profile, trigger, user, session }) {
-      token.provider = "credentials"; //Provider
-      token.accessToken = user[0].token; //Token generado por nuestro Backend
-      token.user = user[0]; //Datos del usuario
-      token.accessToken = user[0].token;
+      if (user) {
+        console.log("jwt", user[0]);
+        token.provider = "credentials"; //Provider
+        token.accessToken = user[0].token; //Token generado por nuestro Backend
+        token.user = user[0]; //Datos del usuario
+        token.accessToken = user[0].token;
+      }
       return token;
     },
     async session({ session, token }) {
@@ -71,6 +74,9 @@ export const authOptions = {
       session.accessToken = token.accessToken; //Token generado por nuestro Backend
       session.user = token?.user; //Datos del usuario
       return session;
+    },
+    async signIn({ account, profile }) {
+      return true;
     },
   },
 };

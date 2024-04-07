@@ -81,7 +81,7 @@ export default function Login() {
         secureLocalStorage.removeItem("ofertar-password");
       }
 
-      window.location.href = "/protect/accounts";
+      window.location.href = "/protect/account";
     } catch (error) {
       // Manejar excepciones
       console.error("Exception during login:", error);

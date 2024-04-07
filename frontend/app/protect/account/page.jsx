@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
+import ProfileUser from "components/app/components/ProfileUser";
 
 export async function getUserInfo() {
   const session = await getServerSession(authOptions);
-
   const data = await fetch(
     `http://localhost:8080/api/users/userInfo/${session.user.id}`,
     {
@@ -22,6 +22,9 @@ export async function getUserInfo() {
 
 export default async function Account() {
   const { userInfo, session } = await getUserInfo();
-  return <>
-  </>;
+  return (
+    <>
+      <ProfileUser userInfo={userInfo} session={session} />
+    </>
+  );
 }

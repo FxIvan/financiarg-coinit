@@ -61,7 +61,6 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, account, profile, trigger, user, session }) {
       if (user) {
-        console.log("jwt", user[0]);
         token.provider = "credentials"; //Provider
         token.accessToken = user[0].token; //Token generado por nuestro Backend
         token.user = user[0]; //Datos del usuario

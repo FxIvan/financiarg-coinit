@@ -10,8 +10,8 @@ const getData = async () => {
   };
 };
 
-export default function Header() {
-  const { session } = getData();
+export default async function Header() {
+  const { session } = await getData();
 
   return (
     <div>

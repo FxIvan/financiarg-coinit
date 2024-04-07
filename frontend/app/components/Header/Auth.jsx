@@ -6,9 +6,8 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Menu", href: "/" },
-  { name: "Categorias", href: "#" },
-  { name: "Cotizaciones", href: "#" },
+  { name: "Inicio", href: "/" },
+  { name: "Mi cuenta", href: "/protect/account" },
 ];
 
 export default function Auth() {
@@ -60,7 +59,7 @@ export default function Auth() {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <button
             onClick={logoutHandler}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg focus:outline-none focus:shadow-outline"
+            className="text-sm font-semibold leading-6 text-gray-900"
           >
             Log out
           </button>
@@ -108,7 +107,7 @@ export default function Auth() {
               <div className="py-6">
                 <button
                   onClick={logoutHandler}
-                  className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg focus:outline-none focus:shadow-outline"
+                  className="text-sm font-semibold leading-6 text-gray-900"
                 >
                   Log out
                 </button>

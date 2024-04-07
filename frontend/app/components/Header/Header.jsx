@@ -5,7 +5,6 @@ import Auth from "./Auth";
 
 const getData = async () => {
   const session = await getServerSession(authOptions);
-  console.log("Session", session);
   return {
     session,
   };

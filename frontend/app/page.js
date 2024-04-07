@@ -3,7 +3,7 @@ import PlantillaInicio from "./components/PlantillaInicio/index.jsx";
 
 async function getProducts() {
   const { promotions } = await fetch(
-    "http://localhost:8080/api/company/getPromotion",
+    "https://financiarg.tech/api/company/getPromotion",
     {
       cache: "no-store",
     }

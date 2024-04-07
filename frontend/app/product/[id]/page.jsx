@@ -2,7 +2,7 @@ import ProductDetail from "components/app/components/ProductDetail";
 
 const getProductID = async (id) => {
   const response = await fetch(
-    `http://localhost:8080/api/company/getPromotion/${id}`
+    `https://financiarg.tech/api/company/getPromotion/${id}`
   );
   const data = await response.json();
   return data;

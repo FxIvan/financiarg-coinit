@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -10,8 +9,10 @@ export default function Register() {
     email: "",
     password: "",
     confirmPassword: "",
+    rol: "user",
   });
   const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,29 +23,29 @@ export default function Register() {
     setIsClient(true);
   }, []);
 
-  const router = useRouter();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const res = await fetch(`http://localhost:8080/api/users/register`, {
       method: "POST",
-      body: form,
+      body: JSON.stringify(form),
       headers: {
-        cache: "no-store",
         "Content-Type": "application/json",
       },
+      credentials: "include",
     });
 
     const info = await res.json();
 
     if (info.success) {
-      myToast({
-        variant: "success",
-        children: info.message,
+      setForm({
+        email: "",
+        password: "",
+        confirmPassword: "",
+        rol: "user",
       });
       router.push("/auth/login");
     } else {
-      console.log("Info", info);
       myToast({
         variant: "danger",
         children: info,
@@ -53,48 +54,65 @@ export default function Register() {
   };
 
   return (
-    <div>
-      {isClient && (
-        <div>
-          <div className="flex items-center justify-center mt-10"></div>
-          <form className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
-            <input
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="Email"
-              required
-            />
-            <input
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder="Password"
-              type="password"
-              required
-            />
-            <input
-              name="confirmPassword"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm Password"
-              type="password"
-              required
-            />
-            <div className="col-span-full">
-              <button
-                type="submit"
-                variant="solid"
-                color="blue"
-                className="w-full"
-                onClick={handleSubmit}
-              >
-                <span>Registrate</span>
-              </button>
+    <div className="p-6 bg-white shadow-md h-screen text-center items-center flex justify-center">
+      <div className="flex flex-col items-center">
+        <div className="">
+          {isClient && (
+            <div>
+              <h2 className="text-2xl font-bold text-black mb-4">Register</h2>
+              <form className="mt-6  flex flex-col">
+                <select
+                  className="w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-black"
+                  name="rol"
+                  value={form.rol}
+                  onChange={handleChange}
+                >
+                  <option value="user">Cliente</option>
+                  <option value="admin">Empresa</option>
+                </select>
+                <input
+                  className="w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-black"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                  type="email"
+                  required
+                />
+                <input
+                  className="w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-black"
+                  name="password"
+                  value={form.password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                  type="password"
+                  required
+                />
+                <input
+                  className="w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-black"
+                  name="confirmPassword"
+                  value={form.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm Password"
+                  type="password"
+                  required
+                />
+                <div className="col-span-2">
+                  <button
+                    type="submit"
+                    className=" bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg focus:outline-none focus:shadow-outline"
+                    onClick={handleSubmit}
+                  >
+                    <span className="flex justify-between items-center py-2 px-4">
+                      Registrate
+                    </span>
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }

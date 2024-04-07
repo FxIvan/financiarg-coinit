@@ -94,49 +94,45 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h2 className="mt-10 text-xl font-semibold text-gray-900">Login</h2>
-      <p className="mt-2 text-sm text-gray-700">
-        <Link href="/auth/register">Registrate</Link>
-      </p>
-      <form>
-        {isClient && (
-          <>
-            <input
-              className="mt-10"
-              type="text"
-              name="email"
-              value={email}
-              onChange={handleChange}
-              placeholder="Email"
-              required
-            />
-            <input
-              className="mt-10"
-              type="text"
-              name="Password"
-              value={password}
-              onChange={handleChange}
-              placeholder="Password"
-              required
-            />
-          </>
-        )}
-        <div>
+    <div className="p-6 bg-white shadow-md h-screen text-center items-center flex justify-center">
+      <div className="flex flex-col items-center">
+        <h2 className="text-2xl font-bold text-black mb-4">Login</h2>
+        <p className="text-sm text-gray-700 mb-4">
+          ¿No tienes cuenta?{" "}
+          <Link href="/auth/register" className="text-blue-500">
+            Regístrate aquí
+          </Link>
+        </p>
+        <form>
+          <input
+            className="text-black w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+            type="text"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            placeholder="Email"
+            required
+          />
+          <input
+            className="text-black w-full px-4 py-3 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+          />
           <button
             type="submit"
-            variant="solid"
-            color="blue"
-            className="w-full"
+            className=" bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg focus:outline-none focus:shadow-outline"
             onClick={loginHandler}
           >
-            <span>
+            <span className="flex justify-between items-center py-2 px-4">
               Ingresar
-              <span aria-hidden="true">&rarr;</span>
             </span>
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "deploy": "scp -r config controllers middleware models resources routes utils package.json index.js root@147.182.250.13:/var/www/backend"
+    "start": "nodemon index.js",
+    "deploy": "scp -r config controllers middlewares models resources routes utils package.json index.js root@147.182.250.13:/var/www/backend"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/boom": "^10.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.19.2",

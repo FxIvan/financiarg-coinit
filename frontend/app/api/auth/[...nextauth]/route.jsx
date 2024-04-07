@@ -5,7 +5,7 @@ export const authOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: "GHRtxpyEZ1bIGhavWxy456/3ignoHNZy7XbVVqE7FpA=",
   pages: {
     signIn: "/auth/login",
     error: "/auth/login",
@@ -25,22 +25,23 @@ export const authOptions = {
         const { loginEmail, loginPassword } = credentials;
         let res;
 
-        res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/users/login`,
-          {
-            method: "POST",
-            body: JSON.stringify({
-              email: loginEmail,
-              password: loginPassword,
-            }),
-            headers: {
-              cache: "no-store",
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        res = await fetch(`http://localhost:8080/api/users/login`, {
+          method: "POST",
+          body: JSON.stringify({
+            email: loginEmail,
+            password: loginPassword,
+          }),
+          headers: {
+            cache: "no-store",
+            "Content-Type": "application/json",
+          },
+        }).catch((error) => {
+          console.error("Error:", error);
+          throw new Error("Error");
+        });
 
         const user = await res.json();
+
         if (user.statusCode >= 400 || user.error) {
           throw new Error(btoa(user.message) || "Error");
         }
@@ -49,8 +50,8 @@ export const authOptions = {
           {
             id: user.user._id,
             email: user.user.email,
+            rol: user.user.rol,
             token: user.token,
-            username: user.user.username,
           },
         ];
         return infoUser;
@@ -60,7 +61,7 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, account, profile, trigger, user, session }) {
       token.provider = "credentials"; //Provider
-      token.accessToken = user[0].id_token; //Token generado por nuestro Backend
+      token.accessToken = user[0].token; //Token generado por nuestro Backend
       token.user = user[0]; //Datos del usuario
       token.accessToken = user[0].token;
       return token;
@@ -68,8 +69,8 @@ export const authOptions = {
     async session({ session, token }) {
       session.provider = token.provider; //Provider
       session.accessToken = token.accessToken; //Token generado por nuestro Backend
-      session.user = token.user; //Datos del usuario
-      return session; //con useSession() en el cliente("use client") podemos acceder a estos datos
+      session.user = token?.user; //Datos del usuario
+      return session;
     },
   },
 };

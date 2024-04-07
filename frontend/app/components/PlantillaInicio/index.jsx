@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function PlantillaInicio({ filter }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+export default function PlantillaInicio({ promotions }) {
   const products = [
     {
       id: 1,

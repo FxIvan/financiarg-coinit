@@ -22,6 +22,10 @@ const companySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    couponBeneficio1: {
+      type: Array,
+      required: true,
+    },
     benefit2Description: {
       type: String,
       required: true,
@@ -34,6 +38,10 @@ const companySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    couponBeneficio2: {
+      type: Array,
+      required: true,
+    },
     benefit3Description: {
       type: String,
       required: true,
@@ -44,6 +52,10 @@ const companySchema = new mongoose.Schema(
     },
     batchBeneficio3: {
       type: String,
+      required: true,
+    },
+    couponBeneficio3: {
+      type: Array,
       required: true,
     },
   },

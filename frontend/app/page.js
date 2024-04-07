@@ -1,7 +1,25 @@
 import Image from "next/image";
 import PlantillaInicio from "./components/PlantillaInicio/index.jsx";
 
+async function getProducts() {
+  const { promotions } = await fetch(
+    "http://localhost:8080/api/company/getPromotion",
+    {
+      cache: "no-store",
+    }
+  )
+    .then((res) => res.json())
+    .catch((err) => {
+      console.error(err);
+    });
+  console.log("promotions", promotions);
+  return {
+    promotions,
+  };
+}
+
 export default function Home() {
+  const { promotions } = getProducts();
   return (
     <main className="">
       <div>
@@ -14,7 +32,7 @@ export default function Home() {
         />
       </div>
       <div>
-        <PlantillaInicio filter={"subasta"} />
+        <PlantillaInicio promotions={promotions} />
       </div>
     </main>
   );

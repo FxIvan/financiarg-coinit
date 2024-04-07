@@ -35,6 +35,7 @@ export default function PanelAdmin({}) {
       }
     );
     const data = await res.json();
+    window.location.reload();
   };
 
   useEffect(() => {

@@ -5,7 +5,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: [
+    "http://localhost:3000",
+    "https://ofertaar.vercel.app",
+    "https://financiarg-coinit-git-main-hack-itba.vercel.app",
+    "https://financiarg-coinit-lvtgadrov-hack-itba.vercel.app",
+  ],
   optionsSuccessStatus: 204,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,

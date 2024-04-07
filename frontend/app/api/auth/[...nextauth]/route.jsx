@@ -25,7 +25,7 @@ export const authOptions = {
         const { loginEmail, loginPassword } = credentials;
         let res;
 
-        res = await fetch(`https://financiarg.tech/api/users/login`, {
+        res = await fetch(`http://localhost:8080/api/users/login`, {
           method: "POST",
           body: JSON.stringify({
             email: loginEmail,

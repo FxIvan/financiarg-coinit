@@ -7,7 +7,7 @@ const nextConfig = {
       "cdn.shopify.com",
       "https://tailwindui.com",
       "1.bp.blogspot.com",
-      "creativefabrica.com",
+      "www.creativefabrica.com",
     ],
   },
 };

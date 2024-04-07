@@ -209,7 +209,6 @@ function classNames(...classes) {
 }
 
 export default function ProductDetail({ producDetail }) {
-  console.log("producDetail", producDetail.urlImagen);
   const [open, setOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
 

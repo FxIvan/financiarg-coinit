@@ -44,7 +44,7 @@ const createPromotion = asyncHandler(async (req, res, next) => {
 const getPromotions = asyncHandler(async (req, res, next) => {
   try {
     const promotions = await CompanyModel.find({});
-    console.log("promotions", promotions);
+
     return res.status(200).json({
       status: true,
       promotions,
@@ -54,4 +54,16 @@ const getPromotions = asyncHandler(async (req, res, next) => {
   }
 });
 
-module.exports = { createPromotion, getPromotions };
+const getPromotionsID = asyncHandler(async (req, res, next) => {
+  try {
+    const promotion = await CompanyModel.findById(req.params.id);
+    return res.status(200).json({
+      status: true,
+      promotion,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+module.exports = { createPromotion, getPromotions, getPromotionsID };

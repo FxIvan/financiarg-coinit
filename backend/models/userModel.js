@@ -26,6 +26,10 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    couponAssigned: {
+      type: Array,
+      default: [],
+    },
     blocked: {
       type: Boolean,
       default: false,

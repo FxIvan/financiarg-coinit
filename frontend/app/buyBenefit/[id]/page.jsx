@@ -1,4 +1,6 @@
 import PaymentGateway from "components/app/components/PaymentGateway";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 const getProductID = async (idProduct) => {
   try {
@@ -22,10 +24,16 @@ const getProductID = async (idProduct) => {
 export default async function BuyBenefitID({ params }) {
   const idProduct = params.id;
   const dataPromotions = await getProductID(idProduct);
+  const session = await getServerSession(authOptions);
+
   const { promotions } = dataPromotions;
   return (
     <div className="">
-      <PaymentGateway promotion={promotions} />
+      <PaymentGateway
+        promotion={promotions}
+        idCompany={idProduct}
+        session={session}
+      />
     </div>
   );
 }

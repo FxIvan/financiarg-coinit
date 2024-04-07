@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-
-const PaymentGateway = ({ promotion }) => {
+import { useRouter } from "next/navigation";
+const PaymentGateway = ({ promotion, session, idCompany }) => {
   const dataPromotions = promotion.promotion;
-  //sacar el query params de idProduct la variable pack
+
+  const router = useRouter();
   const searchParams = useSearchParams();
   const idProduct = searchParams.get("pack");
 
@@ -48,10 +49,34 @@ const PaymentGateway = ({ promotion }) => {
     }
   }, [idProduct]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aquí puedes implementar la lógica para enviar los datos de la tarjeta
-    console.log("Datos de la tarjeta enviados:", dataCard);
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      await fetch("http://localhost:8080/api/payment/created", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${session.user.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          dataCard,
+          dataPackage,
+          idProduct,
+          idCompany,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          router.push("/payment/success");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          // Aquí puedes mostrar un mensaje de error al usuario
+        });
+    } catch (error) {
+      console.error("Error al procesar la compra:", error);
+    }
   };
 
   return (

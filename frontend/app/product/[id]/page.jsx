@@ -14,7 +14,9 @@ export default async function ProductID({ params }) {
 
   return (
     <div className="">
-      <ProductDetail producDetail={promotion} />
+      {promotion && (
+        <ProductDetail producDetail={promotion} idCoupon={idProduct} />
+      )}
     </div>
   );
 }

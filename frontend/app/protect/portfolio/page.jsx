@@ -1,4 +1,3 @@
-import { getServerSession } from "next-auth/next";
 const base64ToImage = (base64) => {
   return "data:image/png;base64," + base64;
 };

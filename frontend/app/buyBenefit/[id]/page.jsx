@@ -5,7 +5,7 @@ import { authOptions } from "../../api/auth/[...nextauth]/route";
 const getProductID = async (idProduct) => {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/company/getPromotion/${idProduct}`
+      `https://financiarg.tech/api/company/getPromotion/${idProduct}`
     ).catch((error) => {
       console.error("Error:", error);
     });

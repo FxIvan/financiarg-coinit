@@ -53,7 +53,7 @@ const PaymentGateway = ({ promotion, session, idCompany }) => {
     try {
       e.preventDefault();
 
-      await fetch("http://localhost:8080/api/payment/created", {
+      await fetch("https://financiarg.tech/api/payment/created", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${session.user.token}`,

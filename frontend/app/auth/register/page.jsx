@@ -26,7 +26,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`http://localhost:8080/api/users/register`, {
+    const res = await fetch(`https://financiarg.tech/api/users/register`, {
       method: "POST",
       body: JSON.stringify(form),
       headers: {

@@ -5,7 +5,7 @@ import ProfileUser from "components/app/components/ProfileUser";
 export async function getUserInfo() {
   const session = await getServerSession(authOptions);
   const data = await fetch(
-    `http://localhost:8080/api/users/userInfo/${session.user.id}`,
+    `https://financiarg.tech/api/users/userInfo/${session.user.id}`,
     {
       cache: "no-store",
       headers: {

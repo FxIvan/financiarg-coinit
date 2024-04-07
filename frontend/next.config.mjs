@@ -2,7 +2,7 @@
 const nextConfig = {
   //permitir imagen https://tailwindui.com
   images: {
-    domains: ["tailwindui.com", "cdn.shopify.com"],
+    domains: ["tailwindui.com", "cdn.shopify.com", "https://tailwindui.com"],
   },
 };
 

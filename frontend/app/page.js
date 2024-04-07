@@ -12,14 +12,15 @@ async function getProducts() {
     .catch((err) => {
       console.error(err);
     });
-  console.log("promotions", promotions);
+
   return {
     promotions,
   };
 }
 
-export default function Home() {
-  const { promotions } = getProducts();
+const Home = async () => {
+  const { promotions } = await getProducts();
+
   return (
     <main className="">
       <div>
@@ -36,4 +37,6 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
+
+export default Home;

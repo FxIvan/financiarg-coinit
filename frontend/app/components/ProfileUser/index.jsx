@@ -19,6 +19,10 @@ const people = [
 ];
 
 export default function ProfileUser({ userInfo, session }) {
+  if (session.user.rol === "admin") {
+    window.location.href = "/protect/empresa";
+  }
+
   return (
     <div className="container mx-auto">
       <ul

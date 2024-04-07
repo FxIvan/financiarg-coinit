@@ -1,4 +1,6 @@
 import ProductDetail from "components/app/components/ProductDetail";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 const getProductID = async (id) => {
   const response = await fetch(
@@ -11,11 +13,16 @@ const getProductID = async (id) => {
 export default async function ProductID({ params }) {
   const idProduct = params.id;
   const { promotion } = await getProductID(idProduct);
+  const session = await getServerSession(authOptions);
 
   return (
     <div className="">
       {promotion && (
-        <ProductDetail producDetail={promotion} idCoupon={idProduct} />
+        <ProductDetail
+          producDetail={promotion}
+          idCoupon={idProduct}
+          session={session}
+        />
       )}
     </div>
   );

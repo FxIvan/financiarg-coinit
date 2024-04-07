@@ -19,7 +19,6 @@ export async function getUserInfo() {
 }
 
 export default async function PanelEmpresa() {
-  const { user } = await getUserInfo();
-
-  return <>{user.role === "admin" && <PanelAdmin />}</>;
+  const session = await getServerSession(authOptions);
+  return <>{session.user.rol === "admin" && <PanelAdmin />}</>;
 }
